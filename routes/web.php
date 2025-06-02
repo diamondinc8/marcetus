@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\lk\LkController;
 use App\Http\Controllers\Products\IndexController;
+use App\Http\Controllers\Products\OrderController;
 use App\Http\Controllers\Products\ShowController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\UserAddProductController;
@@ -46,7 +47,11 @@ Route::middleware([isAuthorized::class])->prefix('lk')->group(function () {
     Route::get('/', LkController::class)->name('lk.index');
 });
 
+Route::post('/placeorder', OrderController::class)->name('order.place');
 
+Route::get('/placeorder', function () {
+    return redirect()->route('index');
+});
 
 Auth::routes();
 
