@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Seller\IndexController as SellerIndexController;
 use App\Http\Controllers\Seller\RegistrationController;
+use App\Http\Middleware\IsSeller;
 
 Route::get('/', IndexController::class)->name('index');
 
@@ -19,9 +20,27 @@ Route::get('/catalog/{user}/{product}/', UserAddProductController::class)->name(
 
 Route::get('/cart', CartController::class)->name('cart.show');
 
-Route::get('/seller', SellerIndexController::class)->name('seller.index');
 
-Route::post('/seller/registration', RegistrationController::class)->name('seller.registration');
+
+
+Route::prefix('seller')->group(function () {
+    Route::get('/', SellerIndexController::class)->name('seller.index');
+    Route::post('/registration', RegistrationController::class)->name('seller.registration');
+    //Чтобы пользователь не мог попасть на роутер, предназначенный для обработки POST запроса
+    Route::get('/registration', function () {
+        return redirect()->route('seller.index');
+    });
+
+    // Ограничение доступа к путям, предназначенным для продавцев
+    // Комментарий: 
+    // middlewate создаётся командой php artisan make:middleware <название> 
+    // реализацию можно посмотреть по пути: app\Http\Middleware\IsSeller.php 
+    Route::middleware([IsSeller::class])->group(function () {
+        Route::get('/check', function () {
+            return 1111;
+        });
+    });
+});
 
 
 

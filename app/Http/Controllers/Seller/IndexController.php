@@ -13,9 +13,9 @@ class IndexController extends Controller
     {
         $userId = Auth::id();
         $isSeller = Seller::where('founder_id', $userId)->exists();
-        $sellerTitle = Seller::where('founder_id', $userId)->first()->title;
 
         if ($isSeller) {
+            $sellerTitle = Seller::where('founder_id', $userId)->first()->title;
             return view('seller.index', compact('sellerTitle'));
         } else {
             return view('seller.registration');
