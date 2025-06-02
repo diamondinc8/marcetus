@@ -10,16 +10,34 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous">
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+Dives+Akuru&family=Unbounded:wght@200..900&display=swap"
+        rel="stylesheet">
     <title>@yield('title')</title>
 
     <style>
         .no-decorate {
             text-decoration: none;
         }
+
+        .highlight {
+            background-color: rgb(246, 246, 249);
+            /* Цвет фона */
+        }
+
+        body {
+            font-family: "Unbounded", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: <weight>;
+            /* например, 400 */
+            font-style: normal;
+        }
     </style>
 </head>
 
-<body>
+<body class = "highlight">
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid container">
@@ -68,14 +86,15 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a href="{{ route('lk.index') }}" class="dropdown-item">Открыть профиль</a>
+                                <a href="{{ route('seller.index') }}" class="dropdown-item">Продавайте</a>
+                                <a href="#" class="dropdown-item">Работайте</a>
+
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Выйти') }}
                                 </a>
-                                <a href="{{ route('seller.index') }}" class="dropdown-item">Продавайте</a>
-                                <a href="#" class="dropdown-item">Работайте</a>
-
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
