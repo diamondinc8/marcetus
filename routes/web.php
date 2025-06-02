@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\lk\LkController;
 use App\Http\Controllers\Products\IndexController;
 use App\Http\Controllers\Products\ShowController;
 use App\Http\Controllers\User\CartController;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Seller\IndexController as SellerIndexController;
 use App\Http\Controllers\Seller\RegistrationController;
+use App\Http\Middleware\isAuthorized;
 use App\Http\Middleware\IsSeller;
 
 Route::get('/', IndexController::class)->name('index');
@@ -22,7 +24,7 @@ Route::get('/cart', CartController::class)->name('cart.show');
 
 
 
-
+// Пути seller/...
 Route::prefix('seller')->group(function () {
     Route::get('/', SellerIndexController::class)->name('seller.index');
     Route::post('/registration', RegistrationController::class)->name('seller.registration');
@@ -35,15 +37,20 @@ Route::prefix('seller')->group(function () {
     // Комментарий: 
     // middlewate создаётся командой php artisan make:middleware <название> 
     // реализацию можно посмотреть по пути: app\Http\Middleware\IsSeller.php 
-    Route::middleware([IsSeller::class])->group(function () {
-        Route::get('/check', function () {
-            return 1111;
-        });
-    });
+    Route::middleware([IsSeller::class])->group(function () {});
+});
+
+// Пути lk/...
+
+Route::middleware([isAuthorized::class])->prefix('lk')->group(function () {
+    Route::get('/', LkController::class)->name('lk.index');
 });
 
 
 
-
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', function () {
+    return redirect()->route('index');
+});
