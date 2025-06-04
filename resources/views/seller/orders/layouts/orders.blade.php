@@ -47,10 +47,10 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Карточки товаров</a>
+                        <a class="nav-link active" aria-current="page" href="#">Главная</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('orders.new') }}">Заказы</a>
+                        <a class="nav-link" href="#">Карточки товаров</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Продажи</a>
@@ -70,6 +70,18 @@
             </div>
         </div>
     </nav>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-top">
+            <div class="container-fluid">
+                <div class="d-flex w-100 justify-content-between">
+                    <a class="nav-link text-center flex-fill" href="{{ route('orders.new') }}">Новые</a>
+                    <a class="nav-link text-center flex-fill" href="#">На сборке</a>
+                    <a class="nav-link text-center flex-fill" href="#">В доставке</a>
+                    <a class="nav-link text-center flex-fill" href="#">Выполнены</a>
+                </div>
+            </div>
+        </nav>
+    </div>
     <div class="container">
         @yield('content')
     </div>

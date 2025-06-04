@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <div class="bg-body rounded w-100 p-4 mt-3">
+    <div class="bg-body rounded w-100 p-4 mt-3 mb-3">
         <div>
             <p>Доствки:</p>
             @if (count($userOrders) != 0)

@@ -9,6 +9,6 @@ class UserOrders extends Model
 {
     use HasFactory;
 
-    protected $table = 'suser_orders';
+    protected $table = 'user_orders';
     protected $guarded = false;
 }

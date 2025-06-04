@@ -8,4 +8,5 @@
 @endsection
 
 @section('content')
+    Какое-то ИНФО
 @endsection

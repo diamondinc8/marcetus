@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Seller\IndexController as SellerIndexController;
+use App\Http\Controllers\Seller\Order\NewOrderController;
 use App\Http\Controllers\Seller\RegistrationController;
 use App\Http\Middleware\isAuthorized;
 use App\Http\Middleware\IsSeller;
@@ -38,7 +39,9 @@ Route::prefix('seller')->group(function () {
     // Комментарий: 
     // middlewate создаётся командой php artisan make:middleware <название> 
     // реализацию можно посмотреть по пути: app\Http\Middleware\IsSeller.php 
-    Route::middleware([IsSeller::class])->group(function () {});
+    Route::middleware([IsSeller::class])->group(function () {
+        Route::get('/new', NewOrderController::class)->name('orders.new');
+    });
 });
 
 // Пути lk/...
