@@ -26,10 +26,24 @@
         <div>
             <p>Доствки:</p>
             @if (count($userOrders) != 0)
-                @foreach ($userOrders as $userOrder)
-                    {{ $userOrder->product_id }}
-                    <!-- ПОТОМ ДОБАВИТЬ КАРТОЧКИ! -->
-                @endforeach
+                <div class="container py-4">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 g-4">
+                        @foreach ($userOrders as $userOrder)
+                            <div class="col">
+                                <div class="card position-relative h-100">
+                                    <img src="..." class="card-img-top" alt="Изображение">
+                                    <div class="card-body">
+                                        <h6 class="card-title">{{ $products->find($userOrder->product_id)->cost }} ₽</h6>
+                                        <p class="card-text small">
+                                            {{ $products->find($userOrder->product_id)->title }}
+                                        </p>
+                                        <div class="text-center text-warning small"> {{ $userOrder->status }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             @else
                 <div class="text-center">
                     <p>Пока нет доставок</p>
