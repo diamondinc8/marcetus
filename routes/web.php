@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Seller\IndexController as SellerIndexController;
 use App\Http\Controllers\Seller\Order\NewOrderController;
+use App\Http\Controllers\Seller\Product\AddController;
+use App\Http\Controllers\Seller\Product\IndexController as ProductIndexController;
+use App\Http\Controllers\Seller\Product\StoreController;
 use App\Http\Controllers\Seller\RegistrationController;
 use App\Http\Middleware\isAuthorized;
 use App\Http\Middleware\IsSeller;
@@ -30,6 +33,8 @@ Route::get('/cart', CartController::class)->name('cart.show');
 Route::prefix('seller')->group(function () {
     Route::get('/', SellerIndexController::class)->name('seller.index');
     Route::post('/registration', RegistrationController::class)->name('seller.registration');
+
+
     //Чтобы пользователь не мог попасть на роутер, предназначенный для обработки POST запроса
     Route::get('/registration', function () {
         return redirect()->route('seller.index');
@@ -40,7 +45,15 @@ Route::prefix('seller')->group(function () {
     // middlewate создаётся командой php artisan make:middleware <название> 
     // реализацию можно посмотреть по пути: app\Http\Middleware\IsSeller.php 
     Route::middleware([IsSeller::class])->group(function () {
+        Route::get('/goods', ProductIndexController::class)->name('all.goods');
+        Route::get('/goods/add', AddController::class)->name('goods.add');
         Route::get('/new', NewOrderController::class)->name('orders.new');
+
+        Route::post('/goods/add/store', StoreController::class)->name('goods.store');
+
+        Route::get('/goods/add/store', function () {
+            return redirect()->route('goods.add');
+        });
     });
 });
 

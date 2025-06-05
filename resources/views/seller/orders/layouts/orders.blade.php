@@ -47,10 +47,11 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Главная</a>
+                        <a class="nav-link active" aria-current="page" href="{{ route('all.goods') }}">Карточки
+                            товаров</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Карточки товаров</a>
+                        <a class="nav-link" href="{{ route('orders.new') }}">Заказы</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Продажи</a>

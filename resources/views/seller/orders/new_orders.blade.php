@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-    <form action="" method="POST">
+    <form action="#" method="POST">
         <div class="mt-3">
             <button type="submit" class="btn btn-primary">Передать на сборку</button>
         </div>
