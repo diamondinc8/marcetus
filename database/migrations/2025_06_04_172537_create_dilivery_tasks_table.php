@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
 
             $table->unsignedBigInteger('order_id');
-            $table->index('order_id', 'product_assembling_task_idx');
-            $table->foreign('order_id', 'product_assembling_task_fk')->on('orders')->references('id');
+            $table->index('order_id', 'product_dilivery_task_idx');
+            $table->foreign('order_id', 'product_dilivery_task_fk')->on('orders')->references('id');
 
             $table->unsignedBigInteger('assembling_task_id');
-            $table->index('assembling_task_id', 'assembling_product_task_idx');
-            $table->foreign('assembling_task_id', 'assembling_product_task_fk')->on('assembling_tasks')->references('id');
+            $table->index('assembling_task_id', 'dilivery_product_task_idx');
+            $table->foreign('assembling_task_id', 'dilivery_product_task_fk')->on('assembling_tasks')->references('id');
             $table->timestamps();
         });
     }
